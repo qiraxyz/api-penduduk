@@ -67,4 +67,8 @@ func RouteInit(r *fiber.App) {
 	kependudukan.Post("/datapsks", kependudukan_controller.MergePsksData)
 	kependudukan.Post("/databansos", kependudukan_controller.MergeJenisBansos)
 	kependudukan.Post("/datakeluarga/delete", kependudukan_controller.DeleteDataKeluarga)
+
+	// anggota pemerlu
+	kependudukan.Post("/pemerlu", kependudukan_controller.AnggotaKeluargaPemerlu)
+	kependudukan.Post("/pemerlu/:nik", kependudukan_controller.AnggotaKeluargaPemerluNik)
 }
