@@ -71,4 +71,7 @@ func RouteInit(r *fiber.App) {
 	// anggota pemerlu
 	kependudukan.Post("/pemerlu", kependudukan_controller.AnggotaKeluargaPemerlu)
 	kependudukan.Post("/pemerlu/:nik", kependudukan_controller.AnggotaKeluargaPemerluNik)
+
+	// kepala keluarga data alamat
+	kependudukan.Post("/kepalakeluargalokasi", kependudukan_controller.KepalaKeluargaLokasiObjek)
 }
