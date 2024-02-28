@@ -43,7 +43,8 @@ func KepalaKeluargaLokasiObjek(c *fiber.Ctx) error {
 	for rows.Next() {
 		var p kependudukan_response.Objek
 		var id, nomorkk, namakk, namaObjek, jenisObjek, identitasObjek, alamat, rt, rw, desaKelurahan, kecamatan,
-			kotaKab, provinsi, latitude, longitude, PIC sql.NullString
+			kotaKab, provinsi, PIC sql.NullString
+		var latitude, longitude sql.NullFloat64
 		err := rows.Scan(&id, &nomorkk, &namakk, &namaObjek, &jenisObjek, &identitasObjek,
 			&alamat, &rt, &rw, &desaKelurahan,
 			&kecamatan, &kotaKab, &provinsi, &latitude, &longitude, &PIC)
@@ -65,8 +66,15 @@ func KepalaKeluargaLokasiObjek(c *fiber.Ctx) error {
 		p.Kecamatan = kecamatan.String
 		p.KotaKab = kotaKab.String
 		p.Provinsi = provinsi.String
-		//p.Latitude = latitude.String
-		//p.Longitude = longitude.String
+
+		// Handle nullable latitude and longitude
+		if latitude.Valid {
+			p.Latitude = latitude.Float64
+		}
+		if longitude.Valid {
+			p.Longitude = longitude.Float64
+		}
+
 		p.PIC = PIC.String
 
 		data = append(data, p)
